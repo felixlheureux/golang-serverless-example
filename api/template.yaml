@@ -1,0 +1,168 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  TargetStage:
+    Description: "dev/prod"
+    Type: String
+  DomainName:
+    Type: String
+  AcmCertificateArn:
+    Type: String
+  VPCSecurityGroupIDs:
+    Description: "An comma-delimited list of strings - the security groups that your Lambda function should be in"
+    Type: CommaDelimitedList
+  VPCSubnetIDs:
+    Description: "An comma-delimited list of strings - the subnet IDs that your Lambda function should be assigned to"
+    Type: CommaDelimitedList
+  Project:
+    Description: "Name of the project"
+    Type: String
+
+Globals:
+  HttpApi:
+    CorsConfiguration:
+      AllowOrigins:
+        - '*'
+      AllowHeaders:
+        - '*'
+      AllowMethods:
+        - OPTIONS
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      MaxAge: 600
+
+  Function:
+    Runtime: go1.x
+    Timeout: 30
+    VpcConfig:
+      SecurityGroupIds:
+        Ref: VPCSecurityGroupIDs
+      SubnetIds:
+        Ref: VPCSubnetIDs
+
+Resources:
+  ApiDetails:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref TargetStage
+    Auth:
+      UsagePlan:
+        CreateUsagePlan: PER_API
+        Description: Usage plan for this API
+        Quota:
+          Limit: 3000
+          Period: MONTH
+        Throttle:
+          BurstLimit: 50
+          RateLimit: 20
+    Domain:
+      DomainName: !Ref DomainName
+      CertificateArn: !Ref AcmCertificateArn
+      EndpointConfiguration: REGIONAL
+      SecurityPolicy: TLS_1_2
+
+  FunctionUserLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: [ UserFunction ]
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${Project}-${TargetStage}-user"
+      RetentionInDays: 7
+
+  UserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "${Project}-${TargetStage}-user"
+      CodeUri: user
+      Handler: main
+      MemorySize: 128
+      Events:
+        AllEvents:
+          Type: HttpApi
+          Properties:
+            Path: /users/{proxy+}
+            Method: any
+            ApiId: !Ref ApiDetails
+            PayloadFormatVersion: '2.0'
+            TimeoutInMillis: 29000
+            RouteSettings:
+              ThrottlingBurstLimit: 600
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - rds-db:connect
+                - secretsmanager:GetSecretValue
+              Resource: '*'
+      Environment:
+        Variables:
+          AUTH_SECRET: ""
+          AUTH_TOKEN_EXPIRY_DURATION_SECONDS: ""
+          DB_HOST: ""
+          DB_NAME: ""
+          DB_PASS: ""
+          DB_PORT: ""
+          DB_USER: ""
+          DOPPLER_CONFIG: ""
+          DOPPLER_ENVIRONMENT: ""
+          DOPPLER_PROJECT: ""
+          LOGS_DEBUG: ""
+          SANCTUARY_DOMAIN: ""
+
+  FunctionAuthLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: [ AuthFunction ]
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${Project}-${TargetStage}-auth"
+      RetentionInDays: 7
+
+  AuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "${Project}-${TargetStage}-auth"
+      CodeUri: auth
+      Handler: main
+      MemorySize: 128
+      Events:
+        AllEvents:
+          Type: HttpApi
+          Properties:
+            Path: /auth/{proxy+}
+            Method: any
+            ApiId: !Ref ApiDetails
+            PayloadFormatVersion: '2.0'
+            TimeoutInMillis: 29000
+            RouteSettings:
+              ThrottlingBurstLimit: 600
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - rds-db:connect
+                - secretsmanager:GetSecretValue
+              Resource: '*'
+      Environment:
+        Variables:
+          AUTH_SECRET: ""
+          AUTH_TOKEN_EXPIRY_DURATION_SECONDS: ""
+          DB_HOST: ""
+          DB_NAME: ""
+          DB_PASS: ""
+          DB_PORT: ""
+          DB_USER: ""
+          DOPPLER_CONFIG: ""
+          DOPPLER_ENVIRONMENT: ""
+          DOPPLER_PROJECT: ""
+          LOGS_DEBUG: ""
+          SANCTUARY_DOMAIN: ""
+
+Outputs:
+  ApiCustomDomainRegionalDomainName:
+    Description: 'Regional domain name for the API'
+    Value: !GetAtt ApiDetails.ApiEndpoint
