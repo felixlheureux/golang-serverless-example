@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/domain"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
 )
 
 type ChallengeInput struct {

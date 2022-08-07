@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/domain"
 	"github.com/golang-jwt/jwt"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
 	"time"
 )
 

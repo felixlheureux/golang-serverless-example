@@ -2,11 +2,11 @@ package controller
 
 import (
 	"fmt"
-	"github.com/childrenofukiyo/odin/pkg/auth"
-	"github.com/childrenofukiyo/odin/pkg/httperror"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/manta-coder/golang-serverless-example/pkg/auth"
+	"github.com/manta-coder/golang-serverless-example/pkg/httperror"
 )
 
 func NewAuthenticator(secret string) echo.MiddlewareFunc {

@@ -3,10 +3,10 @@ package tester
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/childrenofukiyo/odin/pkg/server"
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/manta-coder/golang-serverless-example/pkg/server"
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"

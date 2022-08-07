@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/domain"
-	"github.com/childrenofukiyo/odin/pkg/helpers"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
+	"github.com/manta-coder/golang-serverless-example/pkg/helpers"
 	"strconv"
 	"time"
 )

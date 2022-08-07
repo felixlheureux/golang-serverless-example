@@ -1,10 +1,11 @@
-package main
+package engine
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/db"
-	"github.com/childrenofukiyo/odin/pkg/helpers"
-	"github.com/childrenofukiyo/odin/pkg/server"
 	"github.com/jmoiron/sqlx"
+	"github.com/labstack/echo/v4"
+	"github.com/manta-coder/golang-serverless-example/pkg/db"
+	"github.com/manta-coder/golang-serverless-example/pkg/helpers"
+	"github.com/manta-coder/golang-serverless-example/pkg/server"
 	"go.uber.org/zap"
 )
 
@@ -17,7 +18,7 @@ type Config struct {
 	LogsDebug                      bool   `env:"LOGS_DEBUG"`
 	AuthTokenExpiryDurationSeconds int    `env:"AUTH_TOKEN_EXPIRY_DURATION_SECONDS"`
 	AuthSecret                     string `env:"AUTH_SECRET"`
-	SanctuaryDomain                string `env:"SANCTUARY_DOMAIN"`
+	FrontEndDomain                 string `env:"FRONT_END_DOMAIN"`
 	DopplerEnvironment             string `env:"DOPPLER_ENVIRONMENT"`
 }
 
@@ -37,7 +38,7 @@ func MustServer(config Config) *Server {
 		logger.Fatalw("unable to connect to database", "err", err)
 	}
 
-	e := server.NewEcho(logger, config.SanctuaryDomain)
+	e := server.NewEcho(logger, config.FrontEndDomain)
 
 	return &Server{e, logger, sql}
 }

@@ -1,8 +1,8 @@
 package store
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/domain"
-	"github.com/childrenofukiyo/odin/pkg/tester"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
+	"github.com/manta-coder/golang-serverless-example/pkg/tester"
 	"github.com/segmentio/ksuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

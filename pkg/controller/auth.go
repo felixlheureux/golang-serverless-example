@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/auth"
-	"github.com/childrenofukiyo/odin/pkg/httperror"
-	"github.com/childrenofukiyo/odin/pkg/service"
 	"github.com/labstack/echo/v4"
+	"github.com/manta-coder/golang-serverless-example/pkg/auth"
+	"github.com/manta-coder/golang-serverless-example/pkg/httperror"
+	"github.com/manta-coder/golang-serverless-example/pkg/service"
 	"go.uber.org/zap"
 	"net/http"
 )

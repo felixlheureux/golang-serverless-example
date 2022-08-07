@@ -2,9 +2,9 @@ package store
 
 import (
 	"github.com/Masterminds/squirrel"
-	"github.com/childrenofukiyo/odin/pkg/db"
-	"github.com/childrenofukiyo/odin/pkg/domain"
 	"github.com/jmoiron/sqlx"
+	"github.com/manta-coder/golang-serverless-example/pkg/db"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
 	"github.com/segmentio/ksuid"
 	"go.uber.org/zap"
 	"time"

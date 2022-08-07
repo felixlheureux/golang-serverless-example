@@ -2,9 +2,9 @@ package auth
 
 import (
 	"crypto/ecdsa"
-	"github.com/childrenofukiyo/odin/pkg/domain"
-	"github.com/childrenofukiyo/odin/pkg/tester"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
+	"github.com/manta-coder/golang-serverless-example/pkg/tester"
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"

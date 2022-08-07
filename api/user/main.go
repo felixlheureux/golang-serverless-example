@@ -7,22 +7,22 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	echoadapter "github.com/awslabs/aws-lambda-go-api-proxy/echo"
 	"github.com/caarlos0/env/v6"
-	"github.com/childrenofukiyo/odin/pkg/controller"
-	"github.com/childrenofukiyo/odin/pkg/odin"
-	"github.com/childrenofukiyo/odin/pkg/service"
-	"github.com/childrenofukiyo/odin/pkg/store"
 	"github.com/labstack/echo/v4"
+	"github.com/manta-coder/golang-serverless-example/pkg/controller"
+	"github.com/manta-coder/golang-serverless-example/pkg/engine"
+	"github.com/manta-coder/golang-serverless-example/pkg/service"
+	"github.com/manta-coder/golang-serverless-example/pkg/store"
 )
 
 var echoLambda *echoadapter.EchoLambdaV2
 
 func init() {
-	var config odin.Config
+	var config engine.Config
 	if err := env.Parse(&config); err != nil {
 		panic(fmt.Errorf("failed to load config: %w", err))
 	}
 
-	server := odin.MustServer(config)
+	server := engine.MustServer(config)
 
 	userStore := store.NewUserStore(server.Logger, server.DB)
 	userService := service.NewUserService(server.Logger, userStore)

@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/childrenofukiyo/odin/pkg/httperror"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
+	"github.com/manta-coder/golang-serverless-example/pkg/httperror"
 	"go.uber.org/zap"
 )
 

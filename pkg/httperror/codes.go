@@ -2,8 +2,8 @@ package httperror
 
 import (
 	"fmt"
-	"github.com/childrenofukiyo/odin/pkg/domain"
 	"github.com/labstack/echo/v4"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
 	"github.com/pkg/errors"
 	"net/http"
 )

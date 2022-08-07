@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/domain"
-	"github.com/childrenofukiyo/odin/pkg/helpers"
-	"github.com/childrenofukiyo/odin/pkg/store"
-	"github.com/childrenofukiyo/odin/pkg/tester"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
+	"github.com/manta-coder/golang-serverless-example/pkg/helpers"
+	"github.com/manta-coder/golang-serverless-example/pkg/store"
+	"github.com/manta-coder/golang-serverless-example/pkg/tester"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"

@@ -1,8 +1,8 @@
 package domain
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/helpers"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/manta-coder/golang-serverless-example/pkg/helpers"
 )
 
 type Signature [SignatureSize]byte

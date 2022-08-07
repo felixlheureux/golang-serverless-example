@@ -2,8 +2,8 @@ package store
 
 import (
 	"github.com/Masterminds/squirrel"
-	"github.com/childrenofukiyo/odin/pkg/db"
-	"github.com/childrenofukiyo/odin/pkg/domain"
+	"github.com/manta-coder/golang-serverless-example/pkg/db"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
 )
 
 // postgres wants $ instead of ? for variable bindings

@@ -1,9 +1,9 @@
 package service
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/auth"
-	"github.com/childrenofukiyo/odin/pkg/domain"
-	"github.com/childrenofukiyo/odin/pkg/store"
+	"github.com/manta-coder/golang-serverless-example/pkg/auth"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
+	"github.com/manta-coder/golang-serverless-example/pkg/store"
 	"go.uber.org/zap"
 )
 

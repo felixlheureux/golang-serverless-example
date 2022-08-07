@@ -1,10 +1,10 @@
 package store
 
 import (
-	"github.com/childrenofukiyo/odin/pkg/auth"
-	"github.com/childrenofukiyo/odin/pkg/domain"
-	"github.com/childrenofukiyo/odin/pkg/helpers"
-	"github.com/childrenofukiyo/odin/pkg/tester"
+	"github.com/manta-coder/golang-serverless-example/pkg/auth"
+	"github.com/manta-coder/golang-serverless-example/pkg/domain"
+	"github.com/manta-coder/golang-serverless-example/pkg/helpers"
+	"github.com/manta-coder/golang-serverless-example/pkg/tester"
 	"github.com/segmentio/ksuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
